@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-Platform Artifacts | shiftcrypto69</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --neon-orange: #FF851B; --dark-steel: #1a1a1a; --code-bg: #2d2d2d; }
+        body { background-color: #0f0f0f; color: #e0e0e0; font-family: 'Fira Code', monospace; }
+        .navbar { background: rgba(0,0,0,0.9); border-bottom: 2px solid var(--neon-orange); }
+        .hero-banner { padding: 60px 0; background: linear-gradient(45deg, #000, #1a1a1a); border-bottom: 1px solid #333; }
+        .artifact-card { background: var(--dark-steel); border-left: 5px solid var(--neon-orange); border-radius: 8px; transition: 0.3s; }
+        .artifact-card:hover { background: #252525; transform: scale(1.02); }
+        pre { background: var(--code-bg); padding: 15px; border-radius: 8px; color: #f8f8f2; position: relative; border: 1px solid #444; }
+        .copy-btn { position: absolute; top: 10px; right: 10px; font-size: 0.8rem; border-radius: 5px; }
+        .badge-platform { font-size: 0.8rem; padding: 5px 12px; border-radius: 20px; background: #333; color: var(--neon-orange); border: 1px solid var(--neon-orange); }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#"><i class="fas fa-box-open me-2 text-warning"></i>X-PLATFORM ARTIFACTS</a>
+        <a href="https://shiftcrypto69.github.io/Mastery-Core-Central/" class="btn btn-outline-light btn-sm">Master Hub</a>
+    </div>
+</nav>
+
+<header class="hero-banner text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold">The Art of <span class="text-warning">Packaging</span></h1>
+        <p class="text-secondary">Transformasi kod sumber kepada Artifact (.deb, .apk, .ipa) yang boleh dideploy.</p>
+    </div>
+</header>
+
+<main class="container my-5">
+    
+    <section class="mb-5">
+        <div class="d-flex align-items-center mb-4">
+            <i class="fab fa-linux fa-3x text-info me-3"></i>
+            <div>
+                <h2 class="mb-0">Linux Debian Artifacts</h2>
+                <span class="badge-platform">Ubuntu / Kali / Raspberry Pi OS</span>
+            </div>
+        </div>
+        
+        <div class="card artifact-card p-4 shadow">
+            <h5>1. Struktur Folder Debian</h5>
+            <p class="small text-secondary">Setiap pakej .deb memerlukan struktur folder yang spesifik:</p>
+            <pre>
+my-app/
+├── DEBIAN/
+│   └── control      <span class="text-muted"># Maklumat metadata pakej</span>
+└── usr/
+    └── bin/         <span class="text-muted"># Destinasi fail eksekusi</span>
+    └── share/       <span class="text-muted"># Ikon dan aset</span></pre>
+
+            <h5 class="mt-4">2. Perintah Bina (Build Command)</h5>
+            <p class="small text-secondary">Jalankan ini di terminal WSL anda untuk membina pakej:</p>
+            <pre>
+dpkg-deb --build my-app-folder
+<button class="btn btn-sm btn-outline-warning copy-btn">Salin</button></pre>
+        </div>
+    </section>
+
+    <section class="mb-5">
+        <div class="d-flex align-items-center mb-4">
+            <i class="fab fa-android fa-3x text-success me-3"></i>
+            <div>
+                <h2 class="mb-0">Android Artifacts (AOSP Basis)</h2>
+                <span class="badge-platform">Mobile / Embedded Android</span>
+            </div>
+        </div>
+        
+        <div class="card artifact-card p-4 shadow">
+            <h5>Kitaran Hayat Build (Gradle)</h5>
+            <p class="small text-secondary">Proses utama dari Java/Kotlin ke Dalvik Executable (DEX):</p>
+            <div class="row text-center py-3">
+                <div class="col">
+                    <div class="p-2 border border-secondary rounded">Code</div>
+                </div>
+                <div class="col"><i class="fas fa-arrow-right mt-2"></i></div>
+                <div class="col">
+                    <div class="p-2 border border-secondary rounded">DEX</div>
+                </div>
+                <div class="col"><i class="fas fa-arrow-right mt-2"></i></div>
+                <div class="col">
+                    <div class="p-2 border border-warning rounded fw-bold text-warning">APK</div>
+                </div>
+            </div>
+            <p class="small text-info mt-2"><i class="fas fa-info-circle"></i> Penting: APK mestilah di-"Sign" menggunakan <strong>apksigner</strong> sebelum boleh dipasang.</p>
+        </div>
+    </section>
+
+    <section>
+        <h3 class="mb-4">Standard Tools Mastery</h3>
+        <div class="table-responsive">
+            <table class="table table-dark table-hover border-secondary">
+                <thead>
+                    <tr>
+                        <th>Format</th>
+                        <th>Tool Utama</th>
+                        <th>Perintah Asas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>.deb</td>
+                        <td>dpkg-deb</td>
+                        <td><code>dpkg -i file.deb</code></td>
+                    </tr>
+                    <tr>
+                        <td>.apk</td>
+                        <td>adb</td>
+                        <td><code>adb install app.apk</code></td>
+                    </tr>
+                    <tr>
+                        <td>.ipa</td>
+                        <td>xcodebuild</td>
+                        <td><code>ipa-build path/to/project</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</main>
+
+<footer class="text-center py-4 border-top border-secondary">
+    <p class="small text-secondary">Artifact Mastery | Powered by shiftcrypto69</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
